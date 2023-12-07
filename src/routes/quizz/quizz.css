@@ -2,7 +2,7 @@ body {
     margin: 0;
 }
 
-main {
+.main {
     height: 100vh;
     /* display: flex;
     justify-content: center;
@@ -22,13 +22,23 @@ main {
     justify-content: center;
     align-items: center;
     font-size: large;
+    transition: background-color;
+    transition-duration: 0.3s;
 }
 
-#faux {
+.light-faux {
+    background-color: rgb(202, 0, 0);
+}
+
+.dark-faux {
     background-color: rgb(141, 0, 0);
 }
 
-#vrai {
+.light-vrai {
+    background-color: rgb(0, 155, 0);
+}
+
+.dark-vrai {
     background-color: rgb(0, 70, 0);
 }
 
@@ -44,6 +54,8 @@ main {
     flex-direction: column;
     user-select: none;
     width: fit-content;
+    transition: margin;
+    transition-duration: 0.03s;
 }
 
 #tweet:hover {
@@ -85,6 +97,7 @@ main {
     border: solid;
     border-width: 0.5px;
     border-color: rgb(184, 184, 184);
+    pointer-events: none;
 }
 
 #nom-auteur {
@@ -94,3 +107,4 @@ main {
 #affirmation {
     text-align: justify;
 }
+
