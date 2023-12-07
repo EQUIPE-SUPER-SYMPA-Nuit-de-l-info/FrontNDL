@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ndl-web
+  namespace: ndl
+  labels:
+    app: ndl-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ndl-web
+  template:
+    metadata:
+      labels:
+        app: ndl-web
+    spec:
+      containers:
+        - name: ndl-web
+          image: aimerisson/ndl2023:latest
+          ports:
+            - containerPort: 3000
+
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "250m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ndl-web-service
+  namespace: ndl
+spec:
+  selector:
+    app: ndl-web
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 3000
+  type: ClusterIP

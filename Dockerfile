@@ -1,5 +1,6 @@
 #Dockerfile
-
+# docker build -t aimerisson/ndl2023:latest . --platform linux/amd64
+# docker push aimerisson/ndl2023:latest    
 FROM node:18-alpine AS external-website
 
 WORKDIR /app
