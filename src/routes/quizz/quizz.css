@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+}
+
+main {
+    height: 100vh;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+#vraifaux {
+    z-index: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+#vrai, #faux {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+}
+
+#faux {
+    background-color: rgb(141, 0, 0);
+}
+
+#vrai {
+    background-color: rgb(0, 70, 0);
+}
+
+#tweet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    height: fit-content;
+    border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    width: fit-content;
+}
+
+#tweet:hover {
+    cursor: pointer;
+}
+
+#contenu, #source {
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 300px;
+    border: solid;
+    border-width: 0.5px;
+    border-color: rgb(184, 184, 184);
+}
+
+#contenu {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#source {
+    border-top: none;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#auteur {
+    display: flex;
+    gap: 10px;
+}
+
+#auteur img {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    border: solid;
+    border-width: 0.5px;
+    border-color: rgb(184, 184, 184);
+}
+
+#nom-auteur {
+    font-weight: bold;
+}
+
+#affirmation {
+    text-align: justify;
+}
