@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ndl-ingress-https
+  namespace: ndl 
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`ndl.super-sympa.fr`)
+      kind: Rule
+      services:
+        - name: ndl-front
+          port: 80
+  tls:
+    secretName: ndl-secret-certificate
