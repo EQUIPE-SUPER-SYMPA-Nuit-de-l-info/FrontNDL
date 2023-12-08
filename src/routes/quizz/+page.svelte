@@ -282,12 +282,12 @@
     transition-duration: 1.3s;
     gap: 50px;
     padding-bottom: 0px;
-    padding-top: 10px;
+    padding-top: 0px;
 }
 
 #vrai, #faux {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 100%;
     display: flex;
     justify-content: center;
@@ -349,8 +349,8 @@
 
 .light-vrai svg {
     /* fill and stroke to red */
-    fill: white;
-    stroke: white;
+    fill: rgb(255, 255, 255);
+    stroke: rgb(218, 0, 0);
 }
 
 .dark-vrai:hover svg {

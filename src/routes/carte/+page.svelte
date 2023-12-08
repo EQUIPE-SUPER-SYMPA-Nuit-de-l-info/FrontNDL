@@ -171,9 +171,9 @@
     .allinput {
       display: flex;
       flex-direction: column;
-      padding: 2rem;
+      padding: 0.5rem;
       width: 40%;
-      height: 30%;
+      height: 20%;
     }
     .corpsPage {
       display: flex;
@@ -183,7 +183,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      padding: 2rem;
+      padding: 0.5rem;
     }
     .map-wrap {
         flex: 1;
