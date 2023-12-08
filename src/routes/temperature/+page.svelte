@@ -143,16 +143,17 @@
 </script>
 
 <main>
-    <label for="ville">Ville</label>
-    <input bind:value={ville} id="ville" placeholder="Ville" />
-    <label for="pays">Pays</label>
-    <input bind:value={pays} id="pays" placeholder="Pays" />
-    <label for="nbannee">Nombre d'années</label>
-    <input bind:value={nbAnnee} type="number" min="3" max="82">
-    <input type="button" on:click={getLocation} value="GET">
-
     <div class="corpsPage">
-      <div class="canvatucoco">
+      <div class="partiededroite">
+        <div class="allinput">
+          <label for="ville">Ville</label>
+          <input bind:value={ville} id="ville" placeholder="Ville" />
+          <label for="pays">Pays</label>
+          <input bind:value={pays} id="pays" placeholder="Pays" />
+          <label for="nbannee">Nombre d'années</label>
+          <input bind:value={nbAnnee} type="number" min="3" max="82">
+          <input type="button" on:click={getLocation} value="GET">
+        </div>
         <canvas id="temperatureChart"></canvas>
       </div>
       <div class="map-wrap">
@@ -163,12 +164,21 @@
 </main>
 
 <style>
+    .allinput {
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+      width: 40%;
+      height: 30%;
+    }
     .corpsPage {
       display: flex;
       flex-direction: row;
     }
-    .canvatucoco {
+    .partiededroite {
       flex: 1;
+      display: flex;
+      flex-direction: column;
     }
     .map-wrap {
         flex: 1;
