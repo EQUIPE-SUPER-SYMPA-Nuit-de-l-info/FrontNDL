@@ -153,7 +153,7 @@
           <input bind:value={pays} id="pays" placeholder="Pays" />
           <label for="nbannee">Nombre d'années</label>
           <input bind:value={nbAnnee} type="number" min="3" max="82">
-          <input type="button" on:click={getLocation} value="GET">
+          <input type="button" on:click={getLocation} value="Récupérez les données">
         </div>
         <canvas id="temperatureChart"></canvas>
       </div>
