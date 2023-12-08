@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    import { moyPerYear } from "./temperatureData.js"
     let ville = '';
     let pays = '';
     let nbAnnee = 2;
@@ -13,15 +14,11 @@
     let fin_date = `${year}-${month}-${day}`;
     
 
-    const chiffres = [];
-
     let locLat = -1;
     let locLng = -1;
 
     onMount(() => {
-        for (let i = 2; i <= 82; i++) {
-            chiffres.push(i);
-        }
+
     })
 
     const getLocation = async () => {
@@ -59,7 +56,9 @@
             return response.json();
         })
         .then(data => {
-            console.log(data);
+            console.log(data.daily.temperature_2m_max);
+            console.log(data.daily.time);
+            moyPerYear(data.daily.temperature_2m_max, data.daily.time)
         })
         .catch(error => {
             console.error('Erreur lors de la requête fetch:', error);
