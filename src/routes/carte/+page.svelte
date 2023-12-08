@@ -1,16 +1,16 @@
 <script>
     import { moyPerYear } from "./temperatureData.js";
-    import { onMount, onDestroy } from "svelte";
-    import {Map, MapStyle, Marker, Popup, config} from '@maptiler/sdk';
+    import { onMount } from "svelte";
+    import {Map, MapStyle, Marker, config} from '@maptiler/sdk';
     import Chart from "chart.js/auto"
     let ville = '';
     let pays = '';
-    let nbAnnee = 2;
+    let nbAnnee = 12;
     let deb_date = '';
 
     let today = new Date();
     let year = today.getFullYear();
-    let month = (today.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    let month = (today.getMonth() + 1).toString().padStart(2, '0');
     let day = today.getDate().toString().padStart(2, '0');
 
     let fin_date = `${year}-${month}-${day}`;
@@ -85,9 +85,6 @@
 
         map.on('click', (event) => {
             marker.addTo(map);
-
-            //récupère ici les coordonnées et stock les dans loglng loglat
-
             let {lng, lat} = event.lngLat;
             locLat = lat.toPrecision(4);
             locLng = lng.toPrecision(4);
@@ -103,7 +100,7 @@
         let tmp = new Date(today);
         tmp.setFullYear(today.getFullYear() - nbAnnee);
         let annee = tmp.getFullYear();
-        let mois = (tmp.getMonth() + 1).toString().padStart(2, '0'); // Les mois commencent à 0
+        let mois = (tmp.getMonth() + 1).toString().padStart(2, '0');
         let jour = tmp.getDate().toString().padStart(2, '0');
         deb_date = `${annee}-${mois}-${jour}`;
 
@@ -145,36 +142,57 @@
     }
 </script>
 
-<main>
-    <label for="ville">Ville</label>
-    <input bind:value={ville} id="ville" placeholder="Ville" />
-    <label for="pays">Pays</label>
-    <input bind:value={pays} id="pays" placeholder="Pays" />
-    <label for="nbannee">Nombre d'années</label>
-    <input bind:value={nbAnnee} type="number" min="2" max="82">
-    <input type="button" on:click={getLocation} value="GET">
-    <!-- {#if avgPerYear != {}}
-        <GraphDrawer listOfData={avgPerYear}/>
-    {/if} -->
-
-    <canvas id="temperatureChart"></canvas>
-    <div class="map-wrap">
-        <div class="map" bind:this={mapContainer}></div>
+<body>
+    <div class="corpsPage">
+      <div class="partiededroite">
+        <p>Rentrez ci-dessous ou sélectionnez sur la carte la position à laquelle vous souhaitez obtenir la température des {nbAnnee} dernières années.</p>
+        <div class="allinput">
+          <label for="ville">Ville</label>
+          <input bind:value={ville} id="ville" placeholder="Ville" />
+          <label for="pays">Pays</label>
+          <input bind:value={pays} id="pays" placeholder="Pays" />
+          <label for="nbannee">Nombre d'années</label>
+          <input bind:value={nbAnnee} type="number" min="3" max="82">
+          <input type="button" on:click={getLocation} value="Récupérez les données">
+        </div>
+        <canvas id="temperatureChart"></canvas>
+      </div>
+      <div class="map-wrap">
+          <div class="map" bind:this={mapContainer}></div>
+      </div>
     </div>
-</main>
+    
+</body>
 
 <style>
+    body {
+      overflow: hidden
+    }
+    .allinput {
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+      width: 40%;
+      height: 30%;
+    }
+    .corpsPage {
+      display: flex;
+      flex-direction: row;
+    }
+    .partiededroite {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+    }
     .map-wrap {
-        position: relative;
-        width: 100%;
+        flex: 1;
         height: calc(
             100vh - 77px
         ); /* calculate height of the screen minus the heading */
     }
 
     .map {
-        position: absolute;
-        width: 100%;
         height: 100%;
     }
 </style>
