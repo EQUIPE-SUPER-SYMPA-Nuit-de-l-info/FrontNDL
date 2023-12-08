@@ -1,10 +1,5 @@
 <main>
-    <header>
-        <div id="header">
-            <a href=""><img id="logo" src="/logo_super_sympa.png"></a>
-            <span id="titrePage"><a href="">Planete Super Sympa</a></span>
-        </div>
-    </header>
+    
     <div id="body">
         <p id="intro">
             Sur internet, tout le monde peut poster les infos qu'il veut, ce qui peut rendre difficile la vérification de ces dernières. Pour vous aider à démêler le vrai du faux, voici quelques sources fiables d'informations en rapport avec l'écologie. 
@@ -25,7 +20,6 @@
 <style>
     main {
         height: 100vh;
-        background-color: #C3C9E9;
         font-size: large;
     }
 

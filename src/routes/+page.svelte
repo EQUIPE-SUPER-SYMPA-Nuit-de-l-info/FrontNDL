@@ -25,10 +25,7 @@
 </script>
 
 
-<header>
-    <h1>Planete Super Sympa</h1>
 
-</header>
         <div class="terre">
             <img class="planeteTerre" src= "/gif.gif" alt="planete terre" on:click={fonctionInfosFlash}/>
         </div>
@@ -60,13 +57,12 @@
         {/if}
        
 <style>
-
+    
     :global(body) {
         background-color: #eafaf1;
     }
     
     h1{
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         font-size: 200%;
         position: absolute;
         top: 50%;
@@ -149,7 +145,6 @@
     }
     p{
        font-weight: bold;
-       font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
     .infoflash{
         width: 25%;

@@ -45,7 +45,7 @@
             mouseX = e.clientX;
             mouseY = e.clientY;
             divTweet.style.marginLeft = `${mouseX-(window.innerWidth/2)}px`;
-            divTweet.style.marginTop = `${mouseY-(window.innerHeight/3)}px`;
+            divTweet.style.marginTop = `${mouseY-(window.innerHeight/3)-100}px`;
         }
     }
     function onMouseDown() {
@@ -144,23 +144,7 @@
     } 
 </script>
 <div id="header">
-    <button on:click={()=>{window.location.href = '../'}}>
-        <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="black"
-        stroke="currentColor"
-        stroke-width="1"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="w-4 h-4"
-      >
-        <path
-          d="M3.24,7.51c-0.146,0.142-0.146,0.381,0,0.523l5.199,5.193c0.234,0.238,0.633,0.064,0.633-0.262v-2.634c0.105-0.007,0.212-0.011,0.321-0.011c2.373,0,4.302,1.91,4.302,4.258c0,0.957-0.33,1.809-1.008,2.602c-0.259,0.307,0.084,0.762,0.451,0.572c2.336-1.195,3.73-3.408,3.73-5.924c0-3.741-3.103-6.783-6.916-6.783c-0.307,0-0.615,0.028-0.881,0.063V2.575c0-0.327-0.398-0.5-0.633-0.261L3.24,7.51 M4.027,7.771l4.301-4.3v2.073c0,0.232,0.21,0.409,0.441,0.366c0.298-0.056,0.746-0.123,1.184-0.123c3.402,0,6.172,2.709,6.172,6.041c0,1.695-0.718,3.24-1.979,4.352c0.193-0.51,0.293-1.045,0.293-1.602c0-2.76-2.266-5-5.046-5c-0.256,0-0.528,0.018-0.747,0.05C8.465,9.653,8.328,9.81,8.328,9.995v2.074L4.027,7.771z"
-        ></path>
-      </svg>Menu</button><h3 id="explaination">Glissez l'affirmation à gauche si vous pensez qu'elle est fausse, à droite si vous pensez qu'elle est vraie</h3>
+    <h3 id="explaination">Glissez l'affirmation à gauche si vous pensez qu'elle est fausse, à droite si vous pensez qu'elle est vraie</h3>
 </div>
 <div id="main" on:mousemove={onMouseMove} role="button" tabindex="0">
     <div id="heartBox">
@@ -278,5 +262,194 @@
 </div>
 
 <style>
-  @import "./quizz.css";
+  body {
+    margin: 0;
+    background-color: #eafaf1;
+}
+
+#main {
+    display: flex;
+    height: 78vh;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#vraifaux {
+    z-index: 0;
+    display: flex;    
+    transition: scale;
+    transition-duration: 1.3s;
+    gap: 50px;
+    padding-bottom: 0px;
+    padding-top: 10px;
+}
+
+#vrai, #faux {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    transition: background-color;
+    transition-duration: 0.3s;
+}
+
+.light-faux {
+    /* scale sisze to 10% */
+    background-color: rgb(224, 0, 0);
+    border: 3px solid rgb(224, 0, 0);
+    scale: 1.1;
+}
+
+.dark-faux {
+    border: 3px solid rgb(224, 0, 0);
+    
+}
+
+.light-faux svg {
+    /* fill and stroke to red */
+    fill: white;
+    stroke: white;
+}
+
+.dark-faux svg {
+    /* fill and stroke to red */
+    fill: rgb(224, 0, 0);
+    stroke: rgb(224, 0, 0);
+}
+
+.dark-faux:hover {
+    background-color: rgb(224, 0, 0);
+    color: white;
+    scale: 1.1;   
+}
+
+.dark-vrai:hover {
+    background-color: rgb(1, 176, 1);
+    color: white;
+    scale: 1.1;   
+    
+}
+
+.dark-faux:hover svg {
+    fill: white;
+    stroke: white;
+}
+
+.light-vrai {
+    /* scale sisze to 10% */
+    background-color: rgb(1, 176, 1);
+    border: 3px solid rgb(1, 176, 1);
+    scale: 1.1;
+
+}
+
+.light-vrai svg {
+    /* fill and stroke to red */
+    fill: white;
+    stroke: white;
+}
+
+.dark-vrai:hover svg {
+    fill: white;
+    stroke: white;
+}
+
+.dark-vrai svg {
+    /* fill and stroke to red */
+    fill: rgb(1, 176, 1);
+    stroke: rgb(1, 176, 1);
+}
+
+.dark-vrai {
+    border: 3px solid rgb(1, 176, 1);
+}
+
+#tweet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    height: fit-content;
+    border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    width: fit-content;
+    transition: margin;
+    transition-duration: 0.03s;
+}
+
+#tweet:hover {
+    cursor: pointer;
+}
+
+#contenu, #source {
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 300px;
+    border: solid;
+    border-width: 0.5px;
+    border-color: rgb(184, 184, 184);
+}
+
+#contenu {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#source {
+    border-top: none;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#auteur {
+    display: flex;
+    gap: 10px;
+}
+
+#auteur img {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    border: solid;
+    border-width: 0.5px;
+    border-color: rgb(184, 184, 184);
+    pointer-events: none;
+}
+
+#nom-auteur {
+    font-weight: bold;
+}
+
+#affirmation {
+    text-align: justify;
+}
+
+#points{
+    margin-bottom: 50px;
+}
+
+#heartBox{
+    display: flex;
+    margin-bottom: 25px;
+}
+
+#explaination{
+    text-align: center;
+    padding: 25px;
+    margin: 0;
+    width: 100%;
+    background-color: #b6dac6;
+    border-top: thin solid #34623F;
+}
+
 </style>
