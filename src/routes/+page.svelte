@@ -21,9 +21,17 @@
             input.splice(-konamiSequence.length - 1, input.length - konamiSequence.length);
 
             if (input.join('').includes(konamiSequence.join(''))) {
-                hell = true
+                if(hell){
+                    hell = false
+                document.body.style.backgroundColor = "#eafaf1";
+                input = []; // Réinitialiser la séquence
+                }
+                else{
+                    hell = true
                 document.body.style.backgroundColor = "#ffac93";
                 input = []; // Réinitialiser la séquence
+                }
+
             }
         }
 
