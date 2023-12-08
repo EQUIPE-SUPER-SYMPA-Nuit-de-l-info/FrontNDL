@@ -18,9 +18,18 @@
     </div>
 </main>
 <style>
+
+    * {
+        text-align: justify;
+    }
+
     main {
         height: 100vh;
         font-size: large;
+    }
+
+    #intro {
+        font-size: larger;
     }
 
     #body {
