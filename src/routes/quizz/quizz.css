@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    background-color: #eafaf1;
 }
 
 #main {
@@ -193,5 +194,6 @@ body {
 
 #header>button{
     border: none;
-    background-color: white;
+    background-color: #eafaf1;
+
 }
