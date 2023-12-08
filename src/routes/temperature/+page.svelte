@@ -5,7 +5,7 @@
     import Chart from "chart.js/auto"
     let ville = '';
     let pays = '';
-    let nbAnnee = 2;
+    let nbAnnee = 12;
     let deb_date = '';
 
     let today = new Date();
@@ -151,30 +151,36 @@
     <label for="pays">Pays</label>
     <input bind:value={pays} id="pays" placeholder="Pays" />
     <label for="nbannee">Nombre d'années</label>
-    <input bind:value={nbAnnee} type="number" min="2" max="82">
+    <input bind:value={nbAnnee} type="number" min="3" max="82">
     <input type="button" on:click={getLocation} value="GET">
-    <!-- {#if avgPerYear != {}}
-        <GraphDrawer listOfData={avgPerYear}/>
-    {/if} -->
 
-    <canvas id="temperatureChart"></canvas>
-    <div class="map-wrap">
-        <div class="map" bind:this={mapContainer}></div>
+    <div class="corpsPage">
+      <div class="canvatucoco">
+        <canvas id="temperatureChart"></canvas>
+      </div>
+      <div class="map-wrap">
+          <div class="map" bind:this={mapContainer}></div>
+      </div>
     </div>
+    
 </main>
 
 <style>
+    .corpsPage {
+      display: flex;
+      flex-direction: row;
+    }
+    .canvatucoco {
+      flex: 1;
+    }
     .map-wrap {
-        position: relative;
-        width: 100%;
+        flex: 1;
         height: calc(
             100vh - 77px
         ); /* calculate height of the screen minus the heading */
     }
 
     .map {
-        position: absolute;
-        width: 100%;
         height: 100%;
     }
 </style>
