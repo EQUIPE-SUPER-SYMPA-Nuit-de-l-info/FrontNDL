@@ -3,8 +3,8 @@
     import { onMount } from "svelte";
     import {Map, MapStyle, Marker, config} from '@maptiler/sdk';
     import Chart from "chart.js/auto"
-    let ville = '';
-    let pays = '';
+    let ville = 'Lyon';
+    let pays = 'France';
     let nbAnnee = 12;
     let deb_date = '';
 
