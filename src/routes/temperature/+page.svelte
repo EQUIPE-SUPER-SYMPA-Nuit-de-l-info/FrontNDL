@@ -1,7 +1,7 @@
 <script>
     import { moyPerYear } from "./temperatureData.js";
-    import { onMount, onDestroy } from "svelte";
-    import {Map, MapStyle, Marker, Popup, config} from '@maptiler/sdk';
+    import { onMount } from "svelte";
+    import {Map, MapStyle, Marker, config} from '@maptiler/sdk';
     import Chart from "chart.js/auto"
     let ville = '';
     let pays = '';
@@ -10,7 +10,7 @@
 
     let today = new Date();
     let year = today.getFullYear();
-    let month = (today.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    let month = (today.getMonth() + 1).toString().padStart(2, '0');
     let day = today.getDate().toString().padStart(2, '0');
 
     let fin_date = `${year}-${month}-${day}`;
@@ -85,9 +85,6 @@
 
         map.on('click', (event) => {
             marker.addTo(map);
-
-            //récupère ici les coordonnées et stock les dans loglng loglat
-
             let {lng, lat} = event.lngLat;
             locLat = lat.toPrecision(4);
             locLng = lng.toPrecision(4);
@@ -103,7 +100,7 @@
         let tmp = new Date(today);
         tmp.setFullYear(today.getFullYear() - nbAnnee);
         let annee = tmp.getFullYear();
-        let mois = (tmp.getMonth() + 1).toString().padStart(2, '0'); // Les mois commencent à 0
+        let mois = (tmp.getMonth() + 1).toString().padStart(2, '0');
         let jour = tmp.getDate().toString().padStart(2, '0');
         deb_date = `${annee}-${mois}-${jour}`;
 
