@@ -1,5 +1,6 @@
 <script>
     import infoFlash from './infoFlash.js';
+    import infoFake from './infoFake.js';
     
     let info;
     let affiche = false;
@@ -7,6 +8,33 @@
     let titre="";
     let contenu="";
     let src="";
+    let hell=false;
+
+    import { onMount } from 'svelte';
+
+    let input = [];
+    const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+    onMount(() => {
+        function checkKonamiCode(e) {
+            input.push(e.key);
+            input.splice(-konamiSequence.length - 1, input.length - konamiSequence.length);
+
+            if (input.join('').includes(konamiSequence.join(''))) {
+                hell = true
+                document.body.style.backgroundColor = "#ffac93";
+                input = []; // Réinitialiser la séquence
+            }
+        }
+
+        window.addEventListener('keydown', checkKonamiCode);
+
+        return () => {
+            window.removeEventListener('keydown', checkKonamiCode);
+        };
+    });
+
+
     function fonctionInfosFlash(){
         affiche = true;
         info = infoFlash[numInfo];
@@ -22,34 +50,42 @@
         
     }
 
+    function fonctionInfosFake(){
+        affiche = true;
+        info = infoFake[numInfo];
+        titre = info.titre;
+        contenu = info.contenue;
+        src = info.src;
+        if(numInfo == infoFake.length-1){
+            numInfo = 0;
+        }
+        else{
+            numInfo = numInfo+1;
+        }
+        
+    }
+
 </script>
 
 
 <header>
-    <h1>Planete Super Sympa</h1>
+    <h1>{`${hell?"Planete Pas Super Sympa Dutout":"Planete Super Sympa"}`}</h1>
 
 </header>
         <div class="terre">
-            <img class="planeteTerre" src= "/gif.gif" alt="planete terre" on:click={fonctionInfosFlash}/>
+            <img class={`${hell?"planeteTerreHell":"planeteTerre"}`} src={`${hell?"/hell-main.gif":"/gif.gif"}`} alt="planete terre" on:click={hell?fonctionInfosFake:fonctionInfosFlash}/>
         </div>
         <div class="news">
-            <a href="/debunk">
-                <img class="planeteNews" src= "/news.gif" alt="planete news"/>
+                <img on:click={()=>{window.location.href = '/debunk'}} class={`${hell?"planeteNewsHell":"planeteNews"}`} src={`${hell?"/hell-news.gif":"/news.gif"}`} alt="planete news"/>
                 <p>Debunk</p>
-            </a>
-            
         </div>
         <div class='quizz'>
-            <a href="/quizz">
-                <img class='planeteQuizz' src= "/quizz.gif" alt="planete quizz"/>
+                <img  on:click={()=>{window.location.href = '/quizz'}} class={`${hell?"planeteQuizzHell":"planeteQuizz"}`} src={`${hell?"/hell-quizz.gif":"/quizz.gif"}`} alt="planete quizz"/>
                 <p>Quizz</p>
-            </a>
         </div>
         <div class='sources'>
-            <a href="/sources">
-                <img class='planeteSources' src= "/sources.gif" alt="planete sources"/>
+                <img  on:click={()=>{window.location.href = '/sources'}} class={`${hell?"planeteSourcesHell":"planeteSources"}`} src={`${hell?"/hell-sources.gif":"/sources.gif"}`} alt="planete sources"/>
                 <p>Sources fiables</p>
-            </a>
         </div>
         {#if affiche == true}
             <div class="infoflash">
@@ -78,6 +114,7 @@
     
     .planeteTerre{
         width: 40%;
+        z-index: 2;
     }
 
     .planeteQuizz{
@@ -90,6 +127,25 @@
 
     .planeteSources{
         width: 25%;    
+    }
+
+    .planeteTerreHell{
+        width: 60%;
+        margin-left: 40px;
+        z-index: 2;
+    }
+
+    .planeteQuizzHell{
+        width: 30%;
+    }
+
+    .planeteNewsHell{
+        width: 20%;
+    }
+
+    .planeteSourcesHell{
+        width: 15%;    
+        margin-bottom: 40px;
     }
 
     .terre{
