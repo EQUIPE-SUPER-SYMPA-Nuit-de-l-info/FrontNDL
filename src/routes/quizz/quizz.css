@@ -124,7 +124,7 @@ body {
     cursor: pointer;
 }
 
-#contenu, #source {
+#ctn, #source {
     background-color: white;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -136,7 +136,7 @@ body {
     border-color: rgb(184, 184, 184);
 }
 
-#contenu {
+#ctn {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }

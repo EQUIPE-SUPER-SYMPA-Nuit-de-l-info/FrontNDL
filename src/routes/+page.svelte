@@ -172,6 +172,7 @@
         text-align: left;
     }
     a{
+        cursor: default;
         text-decoration: none;
         text-align: center;
         color: black;
