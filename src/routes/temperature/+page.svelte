@@ -1,7 +1,7 @@
 <script>
     import { moyPerYear } from "./temperatureData.js";
-    import InteractiveMap from "./InteractiveMap.svelte";
-    import { onMount } from "svelte";
+    import { onMount, onDestroy } from "svelte";
+    import {Map, MapStyle, Marker, Popup, config} from '@maptiler/sdk';
     import Chart from "chart.js/auto"
     let ville = '';
     let pays = '';
@@ -21,6 +21,12 @@
     let locLng = -1;
 
     let chart;
+
+    let map;
+    let marker;
+    let mapContainer;
+
+    config.apiKey = "WieJt3VOP2JmuqGm3Kyl";
     
 
     function initializeChart() {
@@ -64,6 +70,31 @@
 
     onMount(() => {
         initializeChart();
+
+        const initialState = { lng: 2.294, lat: 48.54, zoom: 14 };
+
+        map = new Map({
+            container: mapContainer,
+            style: MapStyle.STREETS,
+            center: [initialState.lng, initialState.lat],
+            zoom: 3,
+        });
+
+        marker = new Marker({color: "#FF0000"});
+        marker.setLngLat([0,0]);
+
+        map.on('click', (event) => {
+            marker.addTo(map);
+
+            //récupère ici les coordonnées et stock les dans loglng loglat
+
+            let {lng, lat} = event.lngLat;
+            locLat = lat.toPrecision(4);
+            locLng = lng.toPrecision(4);
+            console.log(locLat, locLng);
+            getTempLoc();
+            marker.setLngLat([lng, lat]);
+        });
     })
 
 
@@ -127,5 +158,23 @@
     {/if} -->
 
     <canvas id="temperatureChart"></canvas>
-    <InteractiveMap />
+    <div class="map-wrap">
+        <div class="map" bind:this={mapContainer}></div>
+    </div>
 </main>
+
+<style>
+    .map-wrap {
+        position: relative;
+        width: 100%;
+        height: calc(
+            100vh - 77px
+        ); /* calculate height of the screen minus the heading */
+    }
+
+    .map {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+</style>
