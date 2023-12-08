@@ -1,5 +1,6 @@
 <script>
     import { onMount } from 'svelte';
+    import question from '../../lib/affirmations-quizz';
 
     let tweetSelect = null;
     let divFaux;
@@ -7,6 +8,10 @@
     let divTweet;
     let mouseX;
     let mouseY;
+    let compteurPoints = 0;
+    let vies = 3;
+    let actualQuestion = selectQuestion();
+    console.log(actualQuestion.affirmation)
 
     onMount(() => {
         divFaux = document.getElementById("faux");
@@ -29,6 +34,12 @@
         darkFaux();
     }
 
+    function selectQuestion(){
+        question.sort(() => Math.random() - 0.5);
+        let selectedQuestion = question.shift();
+        return selectedQuestion
+    }
+
     function onMouseMove(e) {
         if(tweetSelect) {
             mouseX = e.clientX;
@@ -42,6 +53,52 @@
     }
     function onMouseUp() {
         tweetSelect = false;
+        if(mouseX>window.innerWidth/2){
+            if(actualQuestion.reponse){
+                compteurPoints+=1;
+                actualQuestion = selectQuestion();
+                console.log(actualQuestion.affirmation)
+                console.log("points : " + compteurPoints);
+                console.log("vies : " + vies);
+            }
+            else{
+                if(vies>0){
+                    vies-=1;
+                    actualQuestion = selectQuestion();
+                    console.log(actualQuestion.affirmation)
+                }
+                if(vies<=0){
+                    console.log("perdu")
+                    vies =3;
+                    compteurPoints = 0 ;
+                }
+                console.log("points : " + compteurPoints);
+                console.log("vies : " + vies);
+            }
+        }
+        if(mouseX<window.innerWidth/2){
+            if(!actualQuestion.reponse){
+                compteurPoints+=1;
+                actualQuestion = selectQuestion();
+                console.log(actualQuestion.affirmation)
+                console.log("points : " + compteurPoints);
+                console.log("vies : " + vies);
+            }
+            else{
+                if(vies>0){
+                    vies-=1;
+                    actualQuestion = selectQuestion();
+                    console.log(actualQuestion.affirmation)
+                }
+                if(vies<=0){
+                    console.log("perdu")
+                    vies =3;
+                    compteurPoints = 0 ;
+                }
+                console.log("points : " + compteurPoints);
+                console.log("vies : " + vies);
+            }
+        }
     }
     function lightFaux() {
         divFaux.classList.remove('dark-faux');
