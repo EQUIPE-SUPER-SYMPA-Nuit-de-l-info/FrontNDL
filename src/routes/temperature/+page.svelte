@@ -1,5 +1,6 @@
 <script>
     import { onMount } from "svelte";
+    import InteractiveMap from "./InteractiveMap.svelte";
     let ville = '';
     let pays = '';
     let nbAnnee = 2;
@@ -68,6 +69,7 @@
 </script>
 
 <main>
+    <InteractiveMap />
     <label for="ville">Ville</label>
     <input bind:value={ville} id="ville" placeholder="Ville" />
     <label for="pays">Pays</label>
