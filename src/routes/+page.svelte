@@ -33,17 +33,23 @@
             <img class="planeteTerre" src= "/gif.gif" alt="planete terre" on:click={fonctionInfosFlash}/>
         </div>
         <div class="news">
-            <img class="planeteNews" src= "/news.gif" alt="planete news"/>
-            <p>news</p>
+            <a href="/debunk">
+                <img class="planeteNews" src= "/news.gif" alt="planete news"/>
+                <p>Debunk</p>
+            </a>
+            
         </div>
         <div class='quizz'>
-            <a></a>
-            <img class='planeteQuizz' src= "/quizz.gif" alt="planete quizz"/>
-            <p>quizz</p>
+            <a href="/quizz">
+                <img class='planeteQuizz' src= "/quizz.gif" alt="planete quizz"/>
+                <p>Quizz</p>
+            </a>
         </div>
         <div class='sources'>
-            <img class='planeteSources' src= "/sources.gif" alt="planete sources"/>
-            <p>sources/infos</p>
+            <a href="/sourcesFiables">
+                <img class='planeteSources' src= "/sources.gif" alt="planete sources"/>
+                <p>Sources fiables</p>
+            </a>
         </div>
         {#if affiche == true}
             <div class="infoflash">
@@ -164,6 +170,16 @@
         text-align: center;      
         word-wrap: break-word;
         text-align: left;
+    }
+    a{
+        text-decoration: none;
+        text-align: center;
+        color: black;
+    }
+    a:after{
+        text-decoration: none;
+        text-align: center;
+        color: black;
     }
     
 </style>
