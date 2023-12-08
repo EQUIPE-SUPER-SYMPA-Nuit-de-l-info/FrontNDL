@@ -25,6 +25,11 @@
                     En fait, 1 ou 2 degrés à l'échelle du monde, c'est énorme. Penser que ce n'est rien, c'est confondre climat et météo. On parle ici d'une augmentation globale des températures dans le monde entier, et les conséquence de celle-ci sont déjà visibles et très documentées.                 </p>
             </div>
         </div>
+        <a href="/sources">
+        <div id="lienSources">
+            Pour te renseigner sur le changement climatique avec des sources fiables, clique ici !
+        </div>
+        </a>
     </div>
 </main>
 <style>
@@ -72,5 +77,17 @@
         margin: 1rem
     }
 
+    #lienSources {
+        border: thin solid #34623f;
+        padding: 1rem;
+        border-radius: 1rem;
+        box-shadow: inset 0 0 3rem #34623f;
+        transition: all;
+        transition-duration: 0.3s;
+    }
 
+    #lienSources:hover {
+        box-shadow: none;
+        background-color: #34623f;
+    }
 </style>
