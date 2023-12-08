@@ -80,9 +80,16 @@
                 <p>Quizz</p>
         </div>
         <div class='sources'>
-                <img  on:click={()=>{window.location.href = '/sources'}} class={`${hell?"planeteSourcesHell":"planeteSources"}`} src={`${hell?"/hell-sources.gif":"/sources.gif"}`} alt="planete sources"/>
-                <p>Sources fiables</p>
+                <img  on:click={()=>{window.location.href = '/carte'}} class={`${hell?"planeteSourcesHell":"planeteSources"}`} src={`${hell?"/hell-sources.gif":"/sources.gif"}`} alt="planete sources"/>
+                <p>Carte</p>
         </div>
+        {#if !hell}
+        <div class='solutions'>
+            <img  on:click={()=>{window.location.href = '/solutions'}} class="planeteSolutions" src="/solPlanete.gif" alt="planete solution"/>
+            <p>Solutions</p>
+        </div>
+        {/if}
+        
         {#if affiche == true}
             <div class="infoflash">
                 <h2 id = "titre">{titre}</h2>
@@ -125,6 +132,9 @@
     }
 
     .planeteSources{
+        width: 25%;    
+    }
+    .planeteSolutions{
         width: 25%;    
     }
 
@@ -182,6 +192,16 @@
         margin-top: 150px;
         margin-left: -200px;
     }
+    .solutions{
+        display: grid;
+        justify-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: 180px;
+        margin-left: -600px;
+    }
+
     img:hover{
         scale:1.2;
         cursor: pointer;
@@ -200,6 +220,10 @@
     }
 
     .quizz p{
+        margin-top: -30px;
+    }
+
+    .solutions p{
         margin-top: -30px;
     }
     p{
