@@ -1,5 +1,3 @@
-
-
 export const moyPerYear = (temperatures, days) => {
     const yearData = {};
 
@@ -16,7 +14,7 @@ export const moyPerYear = (temperatures, days) => {
 
     const averages = {};
     for (const year in yearData) {
-        averages[year] = yearData[year].sum / yearData[year].count;
+        averages[year] = (yearData[year].sum / yearData[year].count).toPrecision(4);
     }
 
     return averages;

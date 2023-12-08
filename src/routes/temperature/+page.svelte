@@ -1,7 +1,8 @@
 <script>
-    import { onMount } from "svelte";
     import { moyPerYear } from "./temperatureData.js";
     import InteractiveMap from "./InteractiveMap.svelte";
+    import { onMount } from "svelte";
+    import Chart from "chart.js/auto"
     let ville = '';
     let pays = '';
     let nbAnnee = 2;
@@ -14,13 +15,57 @@
 
     let fin_date = `${year}-${month}-${day}`;
     
+    let avgPerYear = {};
 
     let locLat = -1;
     let locLng = -1;
 
-    onMount(() => {
+    let chart;
+    
 
+    function initializeChart() {
+      const ctx = document.getElementById("temperatureChart").getContext("2d");
+  
+      const data = {
+        labels: Object.keys(avgPerYear),
+        datasets: [
+          {
+            label: "Température",
+            data: Object.values(avgPerYear),
+            backgroundColor: "rgba(75, 192, 192, 0.2)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+          },
+        ],
+      };
+  
+      const options = {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      };
+  
+      chart = new Chart(ctx, {
+        type: "line",
+        data: data,
+        options: options,
+      });
+    }
+  
+    function updateChart() {
+      if (chart) {
+        chart.data.labels = Object.keys(avgPerYear);
+        chart.data.datasets[0].data = Object.values(avgPerYear);
+        chart.update();
+      }
+    }
+
+    onMount(() => {
+        initializeChart();
     })
+
 
     const getLocation = async () => {
 
@@ -41,7 +86,8 @@
         .then(data => {
             locLat = ((parseFloat(data[0].boundingbox[0]) + parseFloat(data[0].boundingbox[1]))/2).toPrecision(6);
             locLng = ((parseFloat(data[0].boundingbox[2]) + parseFloat(data[0].boundingbox[3]))/2).toPrecision(6);
-            getTempLoc();
+            avgPerYear = getTempLoc();
+            console.log(avgPerYear);
         })
         .catch(error => {
             console.error('Erreur lors de la requête fetch:', error);
@@ -59,7 +105,8 @@
         .then(data => {
             console.log(data.daily.temperature_2m_max);
             console.log(data.daily.time);
-            moyPerYear(data.daily.temperature_2m_max, data.daily.time)
+            avgPerYear = moyPerYear(data.daily.temperature_2m_max, data.daily.time)
+            updateChart(avgPerYear);
         })
         .catch(error => {
             console.error('Erreur lors de la requête fetch:', error);
@@ -68,7 +115,6 @@
 </script>
 
 <main>
-    <InteractiveMap />
     <label for="ville">Ville</label>
     <input bind:value={ville} id="ville" placeholder="Ville" />
     <label for="pays">Pays</label>
@@ -76,4 +122,10 @@
     <label for="nbannee">Nombre d'années</label>
     <input bind:value={nbAnnee} type="number" min="2" max="82">
     <input type="button" on:click={getLocation} value="GET">
+    <!-- {#if avgPerYear != {}}
+        <GraphDrawer listOfData={avgPerYear}/>
+    {/if} -->
+
+    <canvas id="temperatureChart"></canvas>
+    <InteractiveMap />
 </main>
