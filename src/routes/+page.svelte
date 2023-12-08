@@ -66,11 +66,8 @@
     }
 
 </script>
-
-
-<header>
-    <h1>{`${hell?"Planete Pas Super Sympa Dutout":"Planete Super Sympa"}`}</h1>
-
+<a href="/"><img id="logo" src="/logo_super_sympa.png"><h1>{`${hell?"Planete Pas Super Sympa Dutout":"Planete Super Sympa"}`}</h1></a>
+    
         <div class="terre">
             <img class={`${hell?"planeteTerreHell":"planeteTerre"}`} src={`${hell?"/hell-main.gif":"/gif.gif"}`} alt="planete terre" on:click={hell?fonctionInfosFake:fonctionInfosFlash}/>
         </div>
@@ -98,6 +95,10 @@
     
     :global(body) {
         background-color: #eafaf1;
+    }
+
+    #logo {
+        width: 12rem
     }
     
     h1{
