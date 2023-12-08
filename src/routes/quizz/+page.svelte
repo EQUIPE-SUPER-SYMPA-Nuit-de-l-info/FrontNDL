@@ -45,7 +45,7 @@
             mouseX = e.clientX;
             mouseY = e.clientY;
             divTweet.style.marginLeft = `${mouseX-(window.innerWidth/2)}px`;
-            divTweet.style.marginTop = `${mouseY-(window.innerHeight/2)}px`;
+            divTweet.style.marginTop = `${mouseY-(window.innerHeight/3)}px`;
         }
     }
     function onMouseDown() {
@@ -56,21 +56,34 @@
         if(mouseX>window.innerWidth/2){
             if(actualQuestion.reponse){
                 compteurPoints+=1;
+                if(question.length===0){
+                    window.location.href = '/quizz/gagne';
+                }
+                else{
                 actualQuestion = selectQuestion();
                 console.log(actualQuestion.affirmation)
                 console.log("points : " + compteurPoints);
                 console.log("vies : " + vies);
+                divTweet.style.marginTop = `0px`;
+                divTweet.style.marginLeft = `0px`;
+                }
             }
             else{
                 if(vies>0){
+                    if(question.length===0){
+                    window.location.href = '/quizz/gagne';
+                    }
+                    else{
                     vies-=1;
                     actualQuestion = selectQuestion();
                     console.log(actualQuestion.affirmation)
+                    divTweet.style.marginTop = `0px`;
+                    divTweet.style.marginLeft = `0px`;
+                    }
                 }
                 if(vies<=0){
                     console.log("perdu")
-                    vies =3;
-                    compteurPoints = 0 ;
+                    window.location.href = '/quizz/perdu';
                 }
                 console.log("points : " + compteurPoints);
                 console.log("vies : " + vies);
@@ -78,22 +91,35 @@
         }
         if(mouseX<window.innerWidth/2){
             if(!actualQuestion.reponse){
+                if(question.length===0){
+                    window.location.href = '/quizz/gagne';
+                }
+                else{
                 compteurPoints+=1;
                 actualQuestion = selectQuestion();
                 console.log(actualQuestion.affirmation)
                 console.log("points : " + compteurPoints);
                 console.log("vies : " + vies);
+                divTweet.style.marginTop = `0px`;
+                divTweet.style.marginLeft = `0px`;
+                }
             }
             else{
                 if(vies>0){
                     vies-=1;
+                    if(question.length===0){
+                    window.location.href = '/quizz/gagne';
+                    }
+                    else{
                     actualQuestion = selectQuestion();
                     console.log(actualQuestion.affirmation)
+                    divTweet.style.marginTop = `0px`;
+                    divTweet.style.marginLeft = `0px`;
+                    }
                 }
                 if(vies<=0){
                     console.log("perdu")
-                    vies =3;
-                    compteurPoints = 0 ;
+                    window.location.href = '/quizz/perdu';
                 }
                 console.log("points : " + compteurPoints);
                 console.log("vies : " + vies);
@@ -117,8 +143,57 @@
         divVrai.classList.add('dark-vrai');
     } 
 </script>
-
 <div id="main" on:mousemove={onMouseMove} role="button" tabindex="0">
+    <div id="heartBox">
+    <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill={`${vies>0?"red":"none"}`}
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="w-4 h-4"
+  >
+    <path
+      d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+    ></path>
+  </svg>
+  <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill={`${vies>1?"red":"none"}`}
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="w-4 h-4"
+>
+  <path
+    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+  ></path>
+</svg>
+<svg
+xmlns="http://www.w3.org/2000/svg"
+width="24"
+height="24"
+viewBox="0 0 24 24"
+fill={`${vies>2?"red":"none"}`}
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round"
+class="w-4 h-4"
+>
+<path
+  d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+></path>
+</svg>
+</div>
   <div id="vraifaux">
     <div id="faux" class="dark-faux" role="button" tabindex="0">
       <svg
@@ -170,18 +245,17 @@
           src="https://thumbs.dreamstime.com/b/profil-vectoriel-avatar-par-d%C3%A9faut-utilisateur-179376714.jpg"
           alt="avatar"
         />
-        <p id="nom-auteur">Auteur</p>
+        <p id="nom-auteur">{actualQuestion.auteur}</p>
       </div>
       <p id="affirmation">
-        Le Lorem Ipsum est simplement du faux texte employé dans la composition
-        et la mise en page avant impression. Le Lorem Ipsum est le faux texte
-        standard de l'imprimerie depuis les années 1500.
+        {actualQuestion.affirmation}
       </p>
     </div>
     <div id="source">
-      <p>source</p>
+      <p>source : {actualQuestion.source}</p>
     </div>
   </div>
+  <h1 id="points">{compteurPoints} point(s)</h1>
 </div>
 
 <style>

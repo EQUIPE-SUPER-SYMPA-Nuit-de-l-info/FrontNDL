@@ -28,60 +28,70 @@ export default [
         justification: "Bien que la plantation d'arbres soit bénéfique pour l'environnement, elle ne suffit pas à elle seule pour contrer le réchauffement climatique. La réduction des émissions de gaz à effet de serre est également cruciale."
     },
     {
+        auteur: "All for Climat",
         affirmation : "La fonte des calottes glaciaires de l'Antarctique contribue de manière significative à l'élévation du niveau de la mer.",
         reponse : true,
         source : "Études de la NASA",
         justification : "Les recherches de la NASA montrent que la fonte des glaces en Antarctique contribue de manière significative à l'élévation du niveau de la mer. La perte de glace dans cette région a un impact direct sur l'augmentation des niveaux marins à l'échelle mondiale."
     },
     {
+        auteur: "DuckSociety",
         affirmation : "Les véhicules électriques sont complètement sans impact sur l'environnement.",
         reponse : false,
         source : "Article du magazine ''EcoTech''",
         justification : "Bien que les véhicules électriques réduisent les émissions de gaz à effet de serre lors de leur utilisation, leur production, notamment celle des batteries, a un impact environnemental. L'extraction des matériaux nécessaires et le processus de fabrication génèrent des émissions et d'autres impacts environnementaux."
     },
     {
+        auteur: "AnonymePolitician",
         affirmation : "Les énergies renouvelables sont actuellement capables de remplacer complètement les combustibles fossiles pour l'énergie mondiale.",
         reponse : false,
         source : "",
         justification : "Bien que les énergies renouvelables progressent rapidement, elles ne sont pas encore en mesure de remplacer complètement les combustibles fossiles à l'échelle mondiale. Des défis tels que le stockage de l'énergie, la demande énergétique croissante et les infrastructures existantes doivent encore être surmontés."
     },
     {
+        auteur: "Tous pour le climat !",
         affirmation : "Les arbres en milieu urbain peuvent réduire significativement la pollution atmosphérique.",
         reponse : true,
         source : "Étude de l'Environmental Science & Technology",
         justification : "Les arbres en milieu urbain jouent un rôle important dans la réduction de la pollution atmosphérique. Ils absorbent les polluants et fournissent de l'oxygène, contribuant ainsi à améliorer la qualité de l'air dans les zones urbaines."
     },
     {
+        auteur: "ANARC-TEAM",
         affirmation : "La majorité du plastique dans les océans provient des navires de croisière.",
         reponse : false,
         source :"anti-bateau.com",
         justification : "Cette affirmation est fausse. Bien que les navires de croisière contribuent à la pollution plastique, la majorité du plastique dans les océans provient des terres, notamment à travers les rivières et les systèmes de drainage urbain."
     },
     {
+        auteur: "NotreTerre",
         affirmation : "La culture de produits bio réduit les émissions de gaz à effet de serre par rapport à l'agriculture conventionnelle.",
         reponse : true,
         source : "Étude de l'Université de Californie, Berkeley",
         justification : "L'agriculture biologique, en évitant l'utilisation d'engrais chimiques et de pesticides, contribue à réduire les émissions de gaz à effet de serre. Les pratiques bio favorisent également la santé des sols et la biodiversité."
     },
     {
+        auteur: "Anonymous",
         affirmation : "Les panneaux solaires ne fonctionnent pas par temps nuageux.",
         reponse : false,
         source : "blog 18-25",
         justification : "Bien que leur efficacité soit réduite, les panneaux solaires peuvent tout de même générer de l'électricité par temps nuageux. La lumière diffuse à travers les nuages est captée par les panneaux."
     },
     {
+        auteur: "President",
         affirmation : "Le réchauffement climatique entraînera une augmentation globale des précipitations.",
         reponse : true,
         source : "Rapport du GIEC",
         justification : "Le réchauffement climatique entraîne une augmentation de l'évaporation et une capacité accrue de l'atmosphère à retenir l'humidité, ce qui conduit à une augmentation globale des précipitations. Cependant, cette augmentation n'est pas uniformément répartie et peut conduire à des sécheresses dans certaines régions."
     },
     {
+        auteur: "Donal D Twump",
         affirmation : "L'acidification des océans n'affecte pas la vie marine.",
         reponse : false,
         source : "Article publié dans ''activité-pleine-mer''",
         justification : "L'acidification des océans, causée par l'absorption accrue de CO2, a un impact significatif sur la vie marine, notamment sur les organismes à coquille comme les coraux, les huîtres et les mollusques, affectant ainsi les écosystèmes marins."
     },
     {
+        auteur: "Climactual",
         affirmation : "Les éoliennes sont une source majeure de mortalité pour les oiseaux.",
         reponse : false,
         source : "Blog de protéction des annimaux",
