@@ -4,7 +4,7 @@ body {
 
 #main {
     display: flex;
-    height: 100vh;
+    height: 89vh;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
@@ -176,4 +176,22 @@ body {
 #heartBox{
     display: flex;
     margin-bottom: 25px;
+}
+
+#explaination{
+    text-align: center;
+    padding: 25px;
+    margin: 0;
+    width: 100%;
+}
+
+#header{
+    display: flex;
+    box-shadow: 0px 5px 20px rgb(68, 68, 68);
+    margin: 0;
+}
+
+#header>button{
+    border: none;
+    background-color: white;
 }
