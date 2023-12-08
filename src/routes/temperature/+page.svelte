@@ -142,9 +142,10 @@
     }
 </script>
 
-<main>
+<body>
     <div class="corpsPage">
       <div class="partiededroite">
+        <p>Rentrez ci-dessous ou sélectionnez sur la carte la position à laquelle vous souhaitez obtenir la température des {nbAnnee} dernières années.</p>
         <div class="allinput">
           <label for="ville">Ville</label>
           <input bind:value={ville} id="ville" placeholder="Ville" />
@@ -161,9 +162,12 @@
       </div>
     </div>
     
-</main>
+</body>
 
 <style>
+    body {
+      overflow: hidden
+    }
     .allinput {
       display: flex;
       flex-direction: column;
@@ -179,6 +183,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
+      padding: 2rem;
     }
     .map-wrap {
         flex: 1;
