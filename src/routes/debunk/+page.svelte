@@ -90,8 +90,4 @@
         box-shadow: none;
         background-color: #34623f;
     }
-
-
-
-
 </style>
