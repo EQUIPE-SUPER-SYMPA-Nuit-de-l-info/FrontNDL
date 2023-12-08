@@ -46,7 +46,7 @@
             </a>
         </div>
         <div class='sources'>
-            <a href="/sourcesFiables">
+            <a href="/sources">
                 <img class='planeteSources' src= "/sources.gif" alt="planete sources"/>
                 <p>Sources fiables</p>
             </a>
