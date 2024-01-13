@@ -25,19 +25,91 @@
     }
     $:if(tweetSelect===false) {
         darkVrai();
+        darkFaux();
     }
     $:if(tweetSelect===true && mouseX<window.innerWidth/2) {
         lightFaux();
         darkVrai();
-    }
-    $:if(tweetSelect===false) {
-        darkFaux();
     }
 
     function selectQuestion(){
         question.sort(() => Math.random() - 0.5);
         let selectedQuestion = question.shift();
         return selectedQuestion
+    }
+
+    function leftAnswer() {
+        if(actualQuestion.reponse){
+              compteurPoints+=1;
+              if(question.length===0){
+                  window.location.href = '/quizz/gagne';
+              }
+              else{
+              actualQuestion = selectQuestion();
+              console.log(actualQuestion.affirmation)
+              console.log("points : " + compteurPoints);
+              console.log("vies : " + vies);
+              divTweet.style.marginTop = `0px`;
+              divTweet.style.marginLeft = `0px`;
+              }
+          }
+          else{
+              if(vies>0){
+                  if(question.length===0){
+                  window.location.href = '/quizz/gagne';
+                  }
+                  else{
+                  vies-=1;
+                  actualQuestion = selectQuestion();
+                  console.log(actualQuestion.affirmation)
+                  divTweet.style.marginTop = `0px`;
+                  divTweet.style.marginLeft = `0px`;
+                  }
+              }
+              if(vies<=0){
+                  console.log("perdu")
+                  window.location.href = '/quizz/perdu';
+              }
+              console.log("points : " + compteurPoints);
+              console.log("vies : " + vies);
+          }
+      }
+
+    function rightAnswer() {
+        if(!actualQuestion.reponse){
+            if(question.length===0){
+                window.location.href = '/quizz/gagne';
+            }
+            else{
+            compteurPoints+=1;
+            actualQuestion = selectQuestion();
+            console.log(actualQuestion.affirmation)
+            console.log("points : " + compteurPoints);
+            console.log("vies : " + vies);
+            divTweet.style.marginTop = `0px`;
+            divTweet.style.marginLeft = `0px`;
+            }
+        }
+        else{
+            if(vies>0){
+                vies-=1;
+                if(question.length===0){
+                window.location.href = '/quizz/gagne';
+                }
+                else{
+                actualQuestion = selectQuestion();
+                console.log(actualQuestion.affirmation)
+                divTweet.style.marginTop = `0px`;
+                divTweet.style.marginLeft = `0px`;
+                }
+            }
+            if(vies<=0){
+                console.log("perdu")
+                window.location.href = '/quizz/perdu';
+            }
+            console.log("points : " + compteurPoints);
+            console.log("vies : " + vies);
+        }
     }
 
     function onMouseMove(e) {
@@ -54,78 +126,20 @@
     function onMouseUp() {
         tweetSelect = false;
         if(mouseX>window.innerWidth/2){
-            if(actualQuestion.reponse){
-                compteurPoints+=1;
-                if(question.length===0){
-                    window.location.href = '/quizz/gagne';
-                }
-                else{
-                actualQuestion = selectQuestion();
-                console.log(actualQuestion.affirmation)
-                console.log("points : " + compteurPoints);
-                console.log("vies : " + vies);
-                divTweet.style.marginTop = `0px`;
-                divTweet.style.marginLeft = `0px`;
-                }
-            }
-            else{
-                if(vies>0){
-                    if(question.length===0){
-                    window.location.href = '/quizz/gagne';
-                    }
-                    else{
-                    vies-=1;
-                    actualQuestion = selectQuestion();
-                    console.log(actualQuestion.affirmation)
-                    divTweet.style.marginTop = `0px`;
-                    divTweet.style.marginLeft = `0px`;
-                    }
-                }
-                if(vies<=0){
-                    console.log("perdu")
-                    window.location.href = '/quizz/perdu';
-                }
-                console.log("points : " + compteurPoints);
-                console.log("vies : " + vies);
-            }
+            leftAnswer();
         }
         if(mouseX<window.innerWidth/2){
-            if(!actualQuestion.reponse){
-                if(question.length===0){
-                    window.location.href = '/quizz/gagne';
-                }
-                else{
-                compteurPoints+=1;
-                actualQuestion = selectQuestion();
-                console.log(actualQuestion.affirmation)
-                console.log("points : " + compteurPoints);
-                console.log("vies : " + vies);
-                divTweet.style.marginTop = `0px`;
-                divTweet.style.marginLeft = `0px`;
-                }
-            }
-            else{
-                if(vies>0){
-                    vies-=1;
-                    if(question.length===0){
-                    window.location.href = '/quizz/gagne';
-                    }
-                    else{
-                    actualQuestion = selectQuestion();
-                    console.log(actualQuestion.affirmation)
-                    divTweet.style.marginTop = `0px`;
-                    divTweet.style.marginLeft = `0px`;
-                    }
-                }
-                if(vies<=0){
-                    console.log("perdu")
-                    window.location.href = '/quizz/perdu';
-                }
-                console.log("points : " + compteurPoints);
-                console.log("vies : " + vies);
-            }
+            rightAnswer();
         }
     }
+
+    function sourisGauche() {
+      return (tweetSelect && mouseX<window.innerWidth/2);
+    }
+    function sourisDroite() {
+      return (tweetSelect && mouseX>window.innerWidth/2);
+    }
+
     function lightFaux() {
         divFaux.classList.remove('dark-faux');
         divFaux.classList.add('light-faux');
@@ -198,7 +212,8 @@
     </svg>
     </div>
   <div id="vraifaux">
-    <div id="faux" class="dark-faux" role="button" tabindex="0">
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div id="faux" class={`${sourisGauche() ? "light-faux" : "dark-faux"}`} role="button" on:click={leftAnswer} tabindex="0">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -216,7 +231,8 @@
         ></path>
       </svg>
     </div>
-    <div id="vrai" class="dark-vrai" role="button" tabindex="0">
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div id="vrai" class={`${sourisDroite() ? "light-vrai" : "dark-vrai"}`} role="button" on:click={rightAnswer} tabindex="0">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -295,24 +311,12 @@
     font-size: large;
     transition: background-color;
     transition-duration: 0.3s;
-}
-
-.light-faux {
-    /* scale sisze to 10% */
-    background-color: rgb(224, 0, 0);
-    border: 3px solid rgb(224, 0, 0);
-    scale: 1.1;
+    cursor: pointer;
 }
 
 .dark-faux {
     border: 3px solid rgb(224, 0, 0);
     
-}
-
-.light-faux svg {
-    /* fill and stroke to red */
-    fill: white;
-    stroke: white;
 }
 
 .dark-faux svg {
@@ -321,39 +325,25 @@
     stroke: rgb(224, 0, 0);
 }
 
-.dark-faux:hover {
+.dark-faux:hover, .light-faux {
     background-color: rgb(224, 0, 0);
     color: white;
     scale: 1.1;   
 }
 
-.dark-vrai:hover {
+.dark-vrai:hover, .light-vrai {
     background-color: rgb(1, 176, 1);
     color: white;
     scale: 1.1;   
     
 }
 
-.dark-faux:hover svg {
+.dark-faux:hover svg, .light-faux svg {
     fill: white;
     stroke: white;
 }
 
-.light-vrai {
-    /* scale sisze to 10% */
-    background-color: rgb(1, 176, 1);
-    border: 3px solid rgb(1, 176, 1);
-    scale: 1.1;
-
-}
-
-.light-vrai svg {
-    /* fill and stroke to red */
-    fill: rgb(255, 255, 255);
-    stroke: rgb(218, 0, 0);
-}
-
-.dark-vrai:hover svg {
+.dark-vrai:hover svg, .light-vrai svg {
     fill: white;
     stroke: white;
 }
@@ -382,9 +372,6 @@
     width: fit-content;
     transition: margin;
     transition-duration: 0.03s;
-}
-
-#tweet:hover {
     cursor: pointer;
 }
 
@@ -450,6 +437,11 @@
     width: 100%;
     background-color: #b6dac6;
     border-top: thin solid #34623F;
+}
+
+#header {
+    width: 100vw;
+    overflow: hidden;
 }
 
 </style>
